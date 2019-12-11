@@ -34,8 +34,5 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 
-    public function tasks()
-    {
-        return $this->hasMany(Task::class);
-    }
+
 }
