@@ -16,6 +16,12 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
+        //回傳視圖，可看到輸入任務的表單
         return view('tasks.index');
+
+        //由 DB 擷取使用者所有任務
+        $tasks = Task::where('user_id', $request->user()->id)->get();
+
+
     }
 }
