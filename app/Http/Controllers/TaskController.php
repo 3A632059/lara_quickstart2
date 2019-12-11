@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,8 +17,19 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
+
+
         //回傳視圖，可看到輸入任務的表單
-        return view('tasks.index');
+//        return view('tasks.index');
+
+        //由 DB 擷取使用者所有任務
+        $tasks = Task::where('user_id', $request->user()->id)->get();
+
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
+
+
     }
 
 
