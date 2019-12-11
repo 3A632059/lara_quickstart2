@@ -18,10 +18,22 @@ class TaskController extends Controller
     {
         //回傳視圖，可看到輸入任務的表單
         return view('tasks.index');
-
-        //由 DB 擷取使用者所有任務
-        $tasks = Task::where('user_id', $request->user()->id)->get();
-
-
     }
+
+
+    public function store(Request $request)
+    {
+        //建立新任務
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+
+        $request->user()->tasks()->create([
+            'name' => $request->name,
+        ]);
+
+        return redirect('/tasks');
+    }
+
+
 }
