@@ -20,10 +20,10 @@ class TaskController extends Controller
 
 
         //回傳視圖，可看到輸入任務的表單
-//        return view('tasks.index');
+       // return view('tasks.index');
 
         //由 DB 擷取使用者所有任務
-        //$tasks = Task::where('user_id', $request->user()->id)->get();
+        $tasks = Task::where('user_id', $request->user()->id)->get();
 
         // 取得登入之User的所有tasks
         //$tasks= auth()->user()->tasks;
@@ -35,7 +35,9 @@ class TaskController extends Controller
         //$tasks=Auth::user()->tasks;
 
         //測試 認證->使用者->任務->get_2
-        $tasks=Auth::user()->tasks()->get();
+        //$tasks=Auth::user()->tasks()->get();
+
+
 
         return view('tasks.index', [
             'tasks' => $tasks,
@@ -57,6 +59,18 @@ class TaskController extends Controller
         ]);
 
         return redirect('/tasks');
+    }
+
+    /**
+     * 移除給定的任務。
+     *
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return Response
+     */
+    public function destroy(Request $request, Task $task)
+    {
+        //
     }
 
 
