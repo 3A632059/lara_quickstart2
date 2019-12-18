@@ -37,6 +37,8 @@ class TaskController extends Controller
         //測試 認證->使用者->任務->get_2
         //$tasks=Auth::user()->tasks()->get();
 
+        //$tasks=Auth::user()->tasks()->get();
+
 
 
         return view('tasks.index', [
@@ -68,9 +70,27 @@ class TaskController extends Controller
      * @param  Task  $task
      * @return Response
      */
+    /**
+     * 移除給定的任務。
+     *
+     * @param  Request  $request
+     * @param  Task  $task
+     * @return Response
+     */
     public function destroy(Request $request, Task $task)
     {
-        //
+        /*$this->authorize('destroy', $task);
+        $task->delete();
+        return redirect('/tasks');*/
+
+
+        $this->authorize('destroy', $task);
+
+        $task->delete();
+
+        return redirect('/tasks');
+
+
     }
 
 
